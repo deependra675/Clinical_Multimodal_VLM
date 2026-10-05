@@ -5,3 +5,4 @@ __pycache__/
 *.bin
 .chroma/
 *.log
+data/chroma_db/
