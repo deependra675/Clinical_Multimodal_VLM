@@ -88,14 +88,14 @@ if __name__ == "__main__":
             "id": "CXR_NORM_001",
             "prompt": "frontal chest radiograph showing clear lungs and normal cardiothoracic ratio",
             "findings": "Lungs are clear bilaterally. No pleural effusion or pneumothorax identified.",
-            "impressiopn": "Normal chest radiograph without acute cardiopulomnary findings.",
+            "impression": "Normal chest radiograph without acute cardiopulomnary findings.",
             "metadata": {"pathology": "Normal", "view": "PA", "patient_age": 42},
         },
         {
             "id": "CXR_PNEU_002",
             "prompt": "chest x-ray showing right lower lobe airspace consolidation in indicative of bacterial pneumonia",
             "findings": "Dense focal consolidation within the right lower lung base. Air bronchograms present.",
-            "impressiopn": "cute right lower lobe pneumonia.",
+            "impression": "cute right lower lobe pneumonia.",
             "metadata": {"pathology": "Pneumonia", "view": "PA", "patient_age": 58},
         },
         {
