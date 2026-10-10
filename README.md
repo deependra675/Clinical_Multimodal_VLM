@@ -1,3 +1,12 @@
+---
+title: Clinical Multimodal VLM
+colorFrom: blue
+colorTo: indigo
+sdk: gradio
+sdk_version: 4.44.0
+app_file: app_hf.py
+pinned: false
+---
 # Clinical Multimodal VLM & Diagnostic Retrieval Engine
 
 An end-to-end multimodal diagnostic pipeline aligning chest radiograph visual representations with clinical text findings in a shared 512-dimensional latent space using Microsoft's BiomedCLIP (PubMedBERT + ViT-B/16) and dense vector retrieval.
