@@ -3,6 +3,8 @@ import io
 import time
 from contextlib import asynccontextmanager
 from typing import Optional
+import gradio as gr
+from ui import demo as gradio_demo
 
 from fastapi import FastAPI, File, Form, HTTPException, UploadFile, status
 from fastapi.responses import JSONResponse
@@ -62,7 +64,7 @@ def _run_inference_sync(
             similarity=c["similarity"],
             pathology=c["metadata"].get("pathology", "Unknown"),
             impression=c["metadata"].get("impression", ""),
-            findings=c.get("findings", "")
+            findings=c["metadata"].get("findings", "")
         )
         for c in similar_cases
     ]
@@ -126,3 +128,5 @@ async def diagnostic_radiograph(
             detail=f"Inference failed: {str(e)}",
         )
     return DiagnosticRespone(filename=file.filename or "unknown.png", **result)
+
+app = gr.mount_gradio_app(app, gradio_demo, path="/dashboard")
