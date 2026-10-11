@@ -51,3 +51,16 @@ Full multimodal inference pipeline evaluating differential pathologies and retri
 When a non-thoracic scan (such as a lower-extremity or abdominal radiograph) is submitted, the embedding domain filter detects out-of-distribution cosine similarity scores and rejects the scan before diagnostic calculation.
 
 ![OOD Rejection on Lower Extremity Scan](assets/ood_rejection_guardrail.png)
+
+## Performance Benchmarks
+
+Tested inside the Docker container on CPU across 25 runs using a real chest radiograph:
+
+| Metric | Result |
+| :--- | :--- |
+| **Median Latency (P50)** | 675 ms |
+| **P95 Latency** | 895 ms |
+| **Average Latency** | 696 ms |
+| **Throughput** | ~1.4 scans/sec |
+
+Each run tests the complete pipeline from scratch: image processing, anatomical guardrail check, zero-shot pathology classification (BiomedCLIP), and similar cohort retrieval via ChromaDB.

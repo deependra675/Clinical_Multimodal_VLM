@@ -12,3 +12,7 @@ data/*.jpeg
 
 .gradio/
 
+
+hf_cache/
+.gradio/
+sample_cxr.jpg
