@@ -9,3 +9,6 @@ data/chroma_db/
 data/*.png
 data/*.jpg
 data/*.jpeg
+
+.gradio/
+

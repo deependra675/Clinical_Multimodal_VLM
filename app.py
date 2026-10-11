@@ -14,6 +14,8 @@ from PIL import Image
 from pipeline import ClinicalDiagnosticEngine
 from schemas import DiagnosticRespone, PrimaryScreening, ReferenceCase
 
+from guardrails import check_chest_xray_validity
+
 # global pipeline container
 engine: Optional[ClinicalDiagnosticEngine] = None
 
@@ -46,6 +48,11 @@ def _run_inference_sync(
 
     # single visual forward pass
     img_embedding = engine.embedder.embed_image(image)
+
+    # rejects non cxr/ OOD scans
+    guardrail = check_chest_xray_validity(engine.embedder, img_embedding)
+    if not guardrail["is_valid_cxr"]:
+        raise ValueError(guardrail["message"])
 
     # zero shot screening
     probabilities = engine._compute_zero_shot_probabilities(img_embedding)
