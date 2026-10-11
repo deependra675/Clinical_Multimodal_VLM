@@ -19,3 +19,33 @@ python embedder.py
 - [x] **Zero-Shot Diagnostic Screening (`zero_shot_classifier.py`):** Multi-label pathology screening via temperature-scaled cosine similarity over clinical prompts without task-specific training heads.
 - [ ] **Multimodal Vector Index:** ChromaDB reference case indexing & nearest-neighbor retrieval.
 - [ ] **Grounded VLM Reporting:** Structured findings generation conditioned on retrieved case context.
+
+## Clinical Scope & Target Pathologies
+
+The engine is calibrated specifically for **frontal chest radiographs (PA and AP projections)**. Non-thoracic images or off-axis anatomical scans are filtered out at the API boundary by the out-of-distribution (OOD) guardrail before inference.
+
+Currently, zero-shot screening computes differential probability distributions across six cardiopulmonary conditions:
+
+| Pathology | Target Radiographic Biomarkers |
+| :--- | :--- |
+| **Normal** | Clear lung fields, preserved cardiothoracic ratio ($< 0.5$), sharp bilateral costophrenic angles. |
+| **Pneumonia** | Airspace consolidation, patchy or segmental focal opacities, air bronchograms. |
+| **Cardiomegaly** | Transverse cardiac diameter exceeding 50% of the maximum thoracic inner diameter. |
+| **Pleural Effusion** | Blunting or obliteration of the costophrenic sulci, dependent fluid meniscus signs. |
+| **Atelectasis** | Linear platelike opacities, local volume reduction, mediastinal or fissural shifting. |
+| **Pneumothorax** | Distinct visceral pleural line without peripheral pulmonary vascular markings. |
+
+> **Note:** Zero-shot classification scores candidate text embeddings against normalized visual projections. Expanding detection to other chest abnormalities (e.g., pulmonary edema or nodular patterns) requires adding their clinical anchor descriptions to the zero-shot prompt dictionary and vector index.
+
+## Interface & Inference Workflow
+
+### 1. In-Domain Frontal Chest Screening
+Full multimodal inference pipeline evaluating differential pathologies and retrieving grounded reference cases from the vector index.
+
+![Chest Radiograph Diagnostic Screening](assets/Screenshot 2026-10-11 200022.png)
+(assets/Screenshot 2026-10-11 200101.png)
+
+### 2. Out-of-Distribution (OOD) Guardrail
+When a non-thoracic scan (such as a lower-extremity radiograph) is submitted, the embedding domain filter detects out-of-distribution cosine similarity scores and rejects the scan before diagnostic calculation.
+
+![OOD Rejection on Lower Extremity Scan](assets/Screenshot 2026-10-11 200845.png)
