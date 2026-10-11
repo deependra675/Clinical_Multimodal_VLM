@@ -42,10 +42,11 @@ Currently, zero-shot screening computes differential probability distributions a
 ### 1. In-Domain Frontal Chest Screening
 Full multimodal inference pipeline evaluating differential pathologies and retrieving grounded reference cases from the vector index.
 
-![Chest Radiograph Diagnostic Screening](assets/Screenshot 2026-10-11 200022.png)
-(assets/Screenshot 2026-10-11 200101.png)
+![Chest Radiograph Diagnostic Screening](assets/cxr_screening_dashboard.png)
+
+![Grounded Reference Cohort Retrieval](assets/cxr_cohort_table.png)
 
 ### 2. Out-of-Distribution (OOD) Guardrail
-When a non-thoracic scan (such as a lower-extremity radiograph) is submitted, the embedding domain filter detects out-of-distribution cosine similarity scores and rejects the scan before diagnostic calculation.
+When a non-thoracic scan (such as a lower-extremity or abdominal radiograph) is submitted, the embedding domain filter detects out-of-distribution cosine similarity scores and rejects the scan before diagnostic calculation.
 
-![OOD Rejection on Lower Extremity Scan](assets/Screenshot 2026-10-11 200845.png)
+![OOD Rejection on Lower Extremity Scan](assets/ood_rejection_guardrail.png)
