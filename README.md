@@ -13,6 +13,7 @@ python -m venv .venv
 # Activate environment
 pip install -r requirements.txt
 python embedder.py
+```
 
 ## Features Implemented
 - [x] **Dual-Encoder Latent Alignment (`embedder.py`):** 512-D normalized feature extraction across medical vision and clinical text domains using BiomedCLIP.
